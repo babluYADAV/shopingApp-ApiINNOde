@@ -6,7 +6,7 @@ const Product=require('../../Models/Product')
 
 //fetch all orders
 router.get('/', (req, res, next) => {
-    Order.find().select("product quantity_id").exec().then((docs) => {
+    Order.find().select("product quantity_id").populate("product","name").exec().then((docs) => {
         res.status(200).json({
            count:docs.length,
            orders:docs.map(doc=>{
@@ -17,7 +17,8 @@ router.get('/', (req, res, next) => {
                    request:{
                     type:'GET',
                     url:'http:?/localhost:3000/orders/'+doc._id
-                }       }
+                }     
+              }
                }
            
           )
@@ -64,7 +65,7 @@ Product.findById(req.body.productId)
 //fetch single order
 router.get('/:orderId', (req, res, next) => {
     const id = req.params.orderId;
-    Order.findById(id).exec().then((result) => {
+    Order.findById(id).populate("product").exec().then((result) => {
         if(!result){
             return res.status(404).json({
                 message:'Order not found'
