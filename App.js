@@ -18,8 +18,10 @@ mongoose.connect('mongodb+srv://shivramyadav:lkjh7890@cluster0.koq7g.mongodb.net
     });
 
 mongoose.Promise=global.Promise;
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({extended: true})); 
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
 // handle CORS error
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "*");
