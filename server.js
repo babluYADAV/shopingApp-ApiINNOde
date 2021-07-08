@@ -9,3 +9,7 @@ const server = http.createServer(app);
 server.listen(port, () => {
     console.log('server is running on port ' + port)
 });
+
+// /c/Program\ Files/Heroku/bin/heroku login
+// heroku create
+// git push heroku master
