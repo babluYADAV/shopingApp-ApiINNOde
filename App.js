@@ -6,6 +6,7 @@ const bodyParser = require('body-parser');
 
 const productRoutes = require('./Api/Routes/Products/Product')
 const orderRoutes = require('./Api/Routes/Orders/Order');
+const userRoutes=require('./Api/Routes/user/user')
 //use as logger
 app.use(morgan('dev'));
 
@@ -20,6 +21,7 @@ mongoose.connect('mongodb+srv://shivramyadav:lkjh7890@cluster0.koq7g.mongodb.net
 mongoose.Promise=global.Promise;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use('/uploads',express.static('uploads'))
 // handle CORS error
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Headers", "*");
@@ -31,6 +33,7 @@ app.use((req, res, next) => {
     }
     next()
 })
+app.use('/user', userRoutes);
 app.use('/products', productRoutes);
 app.use('/orders', orderRoutes);
 
